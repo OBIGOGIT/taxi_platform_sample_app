@@ -1,4 +1,3 @@
-LGU+_Android_AF
-
-LGU+ Service Main
+현대차 택시 통합단말 오픈플랫폼용
+차량 데이터 수신을 위한 샘플앱입니다.
 
