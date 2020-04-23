@@ -37,5 +37,5 @@ dependencies {
     implementation 'com.android.support:support-annotations:19.1.0'
     implementation 'com.android.support:localbroadcastmanager:28.0.0'
     //implementation project(':nativelib')
-    implementation name: 'openplatform-vehicle-lib-1.0.4', ext: 'aar'
+    implementation name: 'openplatform-vehicle-lib-1.0.5', ext: 'aar'
 }
