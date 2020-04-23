@@ -27,6 +27,8 @@ import com.obigo.nativelib.Vehicle;
 import com.obigo.nativelib.constant.IConnection;
 import com.obigo.nativelib.NCommunicator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,18 +58,33 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String s) {
                                 Log.d(TAG, "fuel event: " + s);
+                                try {
+                                    JSONObject obj1 = new JSONObject(s);
+                                    JSONObject value = obj1.getJSONObject("value");
+                                    value.getInt("instantconsumption");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         constRequestId = mVehicle.getVehicleSpeed(Vehicle.CONST, new Response() {
                             @Override
                             public void onResponse(String s) {
                                 Log.d(TAG, "vehicle speed const : "+s);
+
                             }
                         });
                         secondRequestId = mVehicle.getVehicleSpeed(Vehicle.MONITORING, new Response() {
                             @Override
                             public void onResponse(String s) {
                                 Log.d(TAG, "vehicle speed monitoring : "+s);
+                                try {
+                                    JSONObject obj1 = new JSONObject(s);
+                                    JSONObject value = obj1.getJSONObject("value");
+                                    value.getInt("speed");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         eventRequestId = mVehicle.getVehicleSpeed(Vehicle.EVENT, new Response() {
@@ -80,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String s) {
                                 Log.d(TAG, "location monitoring : " + s);
+                                try {
+                                    JSONObject obj1 = new JSONObject(s);
+                                    JSONObject value = obj1.getJSONObject("value");
+                                    value.getLong("latitude");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         mVehicle.getCurrentLocation(Vehicle.EVENT, new Response() {
