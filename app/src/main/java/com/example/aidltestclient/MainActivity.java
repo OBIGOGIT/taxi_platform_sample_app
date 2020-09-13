@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 obigo
+ * Copyright 2020 OBIGO Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,79 +37,53 @@ public class MainActivity extends AppCompatActivity {
     private boolean isConnected = false;
     private Vehicle mVehicle;
 
-    private String constRequestId;
-    private String secondRequestId;
-    private String eventRequestId;
+    private String requestVehicleSpeedKey;
+    private String requestLocationKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setConnectionCallback();
 
-        Button btn_subscribe = (Button) findViewById(R.id.btn_subscribe);
-        Button btn_unsubcribe = (Button) findViewById(R.id.btn_unsubscribe);
+        Button btnSubscribe = (Button) findViewById(R.id.btn_subscribe);
+        Button btnUnsubscribe = (Button) findViewById(R.id.btn_unsubscribe);
 
-        btn_subscribe.setOnClickListener(new View.OnClickListener() {
+        btnSubscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isConnected) {
                     try {
-                         mVehicle.getFuelInformation(Vehicle.EVENT, new Response() {
-                            @Override
-                            public void onResponse(String s) {
-                                Log.d(TAG, "fuel event: " + s);
-                                try {
-                                    JSONObject obj1 = new JSONObject(s);
-                                    JSONObject value = obj1.getJSONObject("value");
-                                    value.getInt("instantconsumption");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                        constRequestId = mVehicle.getVehicleSpeed(Vehicle.CONST, new Response() {
-                            @Override
-                            public void onResponse(String s) {
-                                Log.d(TAG, "vehicle speed const : "+s);
-
-                            }
-                        });
-                        secondRequestId = mVehicle.getVehicleSpeed(Vehicle.MONITORING, new Response() {
+                        requestVehicleSpeedKey = mVehicle.getVehicleSpeed(Vehicle.MONITORING, new Response() {
                             @Override
                             public void onResponse(String s) {
                                 Log.d(TAG, "vehicle speed monitoring : "+s);
                                 try {
                                     JSONObject obj1 = new JSONObject(s);
                                     JSONObject value = obj1.getJSONObject("value");
-                                    value.getInt("speed");
+                                    Integer vehicleSpeed = value.getInt("speed");
+                                    Log.d(TAG, "vehicle speed : "+ vehicleSpeed);
+                                    // TODO : Use vehicleSpeed value for something
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                         });
-                        eventRequestId = mVehicle.getVehicleSpeed(Vehicle.EVENT, new Response() {
+                        requestLocationKey = mVehicle.getCurrentLocation(Vehicle.MONITORING, new Response() {
                             @Override
                             public void onResponse(String s) {
-                                Log.d(TAG, "vehicle speed event : "+s);
-                            }
-                        });
-                        mVehicle.getCurrentLocation(Vehicle.MONITORING, new Response() {
-                            @Override
-                            public void onResponse(String s) {
-                                Log.d(TAG, "location monitoring : " + s);
+                                Log.d(TAG, "current location MONITORING : " + s);
                                 try {
                                     JSONObject obj1 = new JSONObject(s);
                                     JSONObject value = obj1.getJSONObject("value");
-                                    value.getLong("latitude");
+                                    Double lat = value.getDouble("latitude");
+                                    Double lon = value.getDouble("longitude");
+                                    Log.d(TAG, "current location : "+ lat + ", " + lon);
+                                    // TODO : Use lat, lon value for something
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                            }
-                        });
-                        mVehicle.getCurrentLocation(Vehicle.EVENT, new Response() {
-                            @Override
-                            public void onResponse(String s) {
-                                Log.d(TAG, "location event : " + s);
                             }
                         });
                     } catch (Exception e) {
@@ -119,14 +93,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_unsubcribe.setOnClickListener(new View.OnClickListener() {
+        btnUnsubscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isConnected) {
                     try {
-                        NCommunicator.getInstance().removeCallbackByKey(constRequestId);
-                        NCommunicator.getInstance().removeCallbackByKey(secondRequestId);
-                        NCommunicator.getInstance().removeCallbackByKey(eventRequestId);
+                        NCommunicator.getInstance().removeCallbackByKey(requestVehicleSpeedKey);
+                        NCommunicator.getInstance().removeCallbackByKey(requestLocationKey);
                         NCommunicator.getInstance().removeAllCallback();
                     } catch (Exception e) {
                         e.printStackTrace();
