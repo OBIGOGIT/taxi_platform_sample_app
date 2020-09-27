@@ -34,4 +34,8 @@ public class ClientApplication extends MultiDexApplication {
         NCommunicator.getInstance().init(this);
         NCommunicator.getInstance().connect();
     }
+
+    public void connectService() {
+        NCommunicator.getInstance().connect();
+    }
 }

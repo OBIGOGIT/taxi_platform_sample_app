@@ -1,24 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_subscribe"
+    <LinearLayout
+        android:id="@+id/layout_vehicleId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="subscribe"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/btn_subscribeVehicleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe Vehicle ID"/>
+        <TextView
+            android:id="@+id/tv_vehicleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_brakeOperation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_subscribeBrake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe BrakePressed"/>
+        <TextView
+            android:id="@+id/tv_brakePressed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_odometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_subscribeOdometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe Odometer"/>
+        <TextView
+            android:id="@+id/tv_odometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_rpm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_subscribeRpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe Rpm"/>
+        <TextView
+            android:id="@+id/tv_rpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_subscribeSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe Speed"/>
+        <TextView
+            android:id="@+id/tv_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_gear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_subscribeGear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe Gear"/>
+        <TextView
+            android:id="@+id/tv_gear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_door"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_subscribeDoor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subscribe Door"/>
+        <TextView
+            android:id="@+id/tv_door"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
     <Button
         android:id="@+id/btn_unsubscribe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="unsubscribe"
-        app:layout_constraintTop_toBottomOf="@id/btn_subscribe"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:text="unsubscribe all"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
